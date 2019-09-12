@@ -1,0 +1,25 @@
+/** css/yourtheme.css **/
+
+/* This line is theme specific - it includes the base theme CSS */
+/*@import '../alabaster.css';  /* for Alabaster */
+/*@import 'theme.css';       /* for the Read the Docs theme */
+
+#id1 ~ .section h3,#oauth-api h3{
+    background-color: #e6e6fa;
+}
+
+#api > .docutils,#airfx-api > .docutils{
+	height: 2px;
+	border-top: 2px solid #696969;
+}
+
+.wy-table-bordered-all td, .rst-content table.docutils td {
+    border-bottom: 1px solid #e1e4e5;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: rgb(225, 228, 229);
+    border-left: 1px solid #e1e4e5 !important;
+        border-left-width: 1px;
+        border-left-style: solid;
+        border-left-color: rgb(225, 228, 229);
+}
