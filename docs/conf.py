@@ -35,6 +35,7 @@ from recommonmark.parser import CommonMarkParser
 extensions = [
     # Auto-generate section labels.
     'sphinx.ext.autosectionlabel',
+    'recommonmark',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -46,7 +47,13 @@ source_parsers = {'.md': CommonMarkParser}
 # You can specify multiple suffix as a list of string:
 #
 # source_suffix = '.rst'
-source_suffix = ['.rst', '.md']
+#source_suffix = ['.rst', '.md']
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}
+
 
 # The master toctree document.
 master_doc = 'index'
