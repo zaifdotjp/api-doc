@@ -59,7 +59,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Zaif api document'
-copyright = 'Fisco Cryptocurrency Exchange Inc.'
+copyright = 'ＣＡＩＣＡ　Ｅｘｃｈａｎｇｅ　Ｉｎｃ.'
 author = 'fcce'
 
 # The version info for the project you're documenting, acts as replacement for
