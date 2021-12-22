@@ -88,7 +88,7 @@ return   実行結果    dict or string
 =============================================== ===================================================================
 method not found                                指定されたメソッドが存在しません。
 no data found for the key                       APIキーが無効です。
-time wait restriction\, please later             同じメソッドが短時間に多く呼び出しされたときに発生します。しばらく待ってから、再度お試しください。
+time wait restriction\, please try later.       同じメソッドが短時間に多く呼び出しされたときに発生します。しばらく待ってから、再度お試しください。
 signature mismatch                              署名が不適切です。
 invalid access token                            無効なトークンが指定されています。
 expired access token                            トークンの有効期限が切れています。トークン再発行APIを参考にし、トークンの再発行をしてください。
