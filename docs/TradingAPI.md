@@ -666,6 +666,10 @@ address    Yes  送信先のアドレス                                        
 message    No   送信メッセージ(XEMのみ)                                                                          ASCII str
 amount     Yes  出金額                                                                                           numerical
 opt_fee    No   採掘者への手数料。ただしcurrencyがbtc、mona以外の時に指定するとエラーとなります。                numerical
+kind       No   (self：本人宛、other：それ以外)　左記文字列のみ許可                                              str
+beneficiary_name No   max：100文字まで                                                                           str
+vasp_master_id No 現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                     str
+vasp_name  No   vasp_master_id　が 999(その他）の場合のみ指定必須。max：100文字まで                              str
 ========== ==== ================================================================================================ ============ =========
 ```
 
@@ -704,8 +708,26 @@ funds 残高                           dict
 =============================================== ===================================================================
 kyc is not finished                             郵送による本人確認が完了していません。
 insufficient funds                              取引に必要な残高が存在しません。
+please specify kind                             宛先を設定してください
+invalid kind                                    宛先の形式が正しくありません
+please specify beneficiary_name                 送金先氏名を設定してください
+invalid beneficiary_name length                 送金先氏名の長さが正しくありません
+invalid beneficiary_name format                 送金先氏名の形式が正しくありません
+please specify vasp_master_id                   VASP情報Iを設定してください
+invalid vasp_master_id                          VASP情報IDが正しくありません
+please specify vasp_name                        送金先を設定してください
+invalid vasp_name length                        送金先の長さが正しくありません
+invalid vasp_name format                        送金先の形式が正しくありません
 =============================================== ===================================================================
 ```
+
+#### 補足
+* kind、beneficiary_name、vasp_master_id、vasp_nameは、
+　addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されている場合、それらの値が適用されます。
+　（この場合、当該リクエストで上記４項目が設定されても無視されます）
+　もしくはaddressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されていない場合は
+　当該リクエストで上記４項目を必ず設定する必要があります。
+
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -801,6 +823,11 @@ timestamp 出金日時           UNIX_TIMESTAMP
 address   出金先アドレス     str
 amount    取引量             float
 txid      トランザクションID str
+kind      宛先               str
+beneficiary_name 送金先氏名  str
+vasp_master_id VASP情報ID    str
+vasp_name 送金先             str
+vasp_timestamp VASP情報登録日時 UNIX_TIMESTAMP
 ========= ================== ==============
 ```
 
