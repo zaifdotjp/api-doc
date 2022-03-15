@@ -657,20 +657,20 @@ multisigトランザクションに対応していない他の取引所やサー
 
 #### パラメータ
 ```eval_rst
-========== ==== ================================================================================================ ============ =========
-パラメータ 必須 詳細                                                                                             型           デフォルト
-========== ==== ================================================================================================ ============ =========
-method     Yes  withdraw                                                                                         str
-currency   Yes  引き出す通貨。現物公開APIのcurrenciesで取得できるものが指定できます。ただしjpyは指定できません。 str(例)btc等
-address    Yes  送信先のアドレス                                                                                 str
-message    No   送信メッセージ(XEMのみ)                                                                          ASCII str
-amount     Yes  出金額                                                                                           numerical
-opt_fee    No   採掘者への手数料。ただしcurrencyがbtc、mona以外の時に指定するとエラーとなります。                numerical
-kind       No   (self：本人宛、other：それ以外)　左記文字列のみ許可                                              str
-beneficiary_name No   max：100文字まで                                                                           str
-vasp_master_id No 現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                     str
-vasp_name  No   vasp_master_id　が 999(その他）の場合のみ指定必須。max：100文字まで                              str
-========== ==== ================================================================================================ ============ =========
+================= ==== ================================================================================================ ============ =========
+パラメータ        必須 詳細                                                                                             型           デフォルト
+================= ==== ================================================================================================ ============ =========
+method            Yes  withdraw                                                                                         str
+currency          Yes  引き出す通貨。現物公開APIのcurrenciesで取得できるものが指定できます。ただしjpyは指定できません。 str(例)btc等
+address           Yes  送信先のアドレス                                                                                 str
+message           No   送信メッセージ(XEMのみ)                                                                          ASCII str
+amount            Yes  出金額                                                                                           numerical
+opt_fee           No   採掘者への手数料。ただしcurrencyがbtc、mona以外の時に指定するとエラーとなります。                numerical
+kind              No   (self：本人宛、other：それ以外)　左記文字列のみ使用可能                                          str
+beneficiary_name  No   max：100文字まで 全角カナと全角スペースのみ使用可能                                              str
+vasp_master_id    No   現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                       str
+vasp_name         No   vasp_master_id　が 1(その他）の場合のみ指定必須。max：100文字まで                                str
+================= ==== ================================================================================================ ============ =========
 ```
 
 #### 戻り値
@@ -723,10 +723,10 @@ invalid vasp_name format                        送金先の形式が正しく�
 
 #### 補足
 * kind、beneficiary_name、vasp_master_id、vasp_nameは、
-　addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されている場合、それらの値が適用されます。
-　（この場合、当該リクエストで上記４項目が設定されても無視されます）
-　もしくはaddressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されていない場合は
-　当該リクエストで上記４項目を必ず設定する必要があります。
+addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されている場合、それらの値が適用されます。
+（この場合、当該リクエストで上記４項目が設定されても無視されます）
+もしくはaddressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されていない場合は
+当該リクエストで上記４項目を必ず設定する必要があります。
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -816,19 +816,19 @@ end        No   終了タイムスタンプ           UNIX_TIMESTAMP    infinity
 
 #### 戻り値
 ```eval_rst
-========= ================== ==============
+================= ================== ==============
 キー      詳細               型
-========= ================== ==============
-timestamp 出金日時           UNIX_TIMESTAMP
-address   出金先アドレス     str
-amount    取引量             float
-txid      トランザクションID str
-kind      宛先               str
-beneficiary_name 送金先氏名  str
-vasp_master_id VASP情報ID    str
-vasp_name 送金先             str
-vasp_timestamp VASP情報登録日時 UNIX_TIMESTAMP
-========= ================== ==============
+================= ================== ==============
+timestamp         出金日時           UNIX_TIMESTAMP
+address           出金先アドレス     str
+amount            取引量             float
+txid              トランザクションID str
+kind              宛先               str
+beneficiary_name  送金先氏名         str
+vasp_master_id    VASP情報ID         str
+vasp_name         送金先             str
+vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
+================= ================== ==============
 ```
 
 ```
@@ -840,12 +840,20 @@ vasp_timestamp VASP情報登録日時 UNIX_TIMESTAMP
           "address":"12qwQ3sPJJAosodSUhSpMds4WfUPBeFEM2",
           "amount":0.001,
           "txid":"64dcf59523379ba282ae8cd61d2e9382c7849afe3a3802c0abb08a60067a159f",
+          "kind": "本人宛",
+          "beneficiary_name": "ザイフタロウ",
+          "vasp_name": "マネーパートナーズ",
+          "vasp_timestamp": "2022/03/14 10:00"
         },
         "3814":{
           "timestamp":1435548083,
           "address":"12qwQ3sPJJAosodSUhSpMds4WfUPBeFEM2",
           "amount":0.001,
-          "txid":"7d012cfff6e67a8938f93215367eef4177604459631ea62c85550980dca71819"
+          "txid":"7d012cfff6e67a8938f93215367eef4177604459631ea62c85550980dca71819",
+          "kind": "本人宛",
+          "beneficiary_name": "ザイフハナコ",
+          "vasp_name": "Coinbase",
+          "vasp_timestamp": "2022/03/14 12:02"
         },
     }
 }
