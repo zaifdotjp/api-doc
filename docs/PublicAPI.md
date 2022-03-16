@@ -510,14 +510,14 @@ vasp_master_id 「all」の場合<br />
         2,
         {
             "id": 2,
-            "name": "マネーパートナーズ"
+            "name": "タロウ証券"
         }
     ],
     [
         3,
         {
             "id": 3,
-            "name": "bitFlyer"
+            "name": "Coinhanako"
         }
     ],
 ・・・

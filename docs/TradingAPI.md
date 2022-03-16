@@ -842,7 +842,7 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
           "txid":"64dcf59523379ba282ae8cd61d2e9382c7849afe3a3802c0abb08a60067a159f",
           "kind": "本人宛",
           "beneficiary_name": "ザイフタロウ",
-          "vasp_name": "マネーパートナーズ",
+          "vasp_name": "タロウ証券",
           "vasp_timestamp": "2022/03/14 10:00"
         },
         "3814":{
@@ -852,7 +852,7 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
           "txid":"7d012cfff6e67a8938f93215367eef4177604459631ea62c85550980dca71819",
           "kind": "本人宛",
           "beneficiary_name": "ザイフハナコ",
-          "vasp_name": "Coinbase",
+          "vasp_name": "Coinhanako",
           "vasp_timestamp": "2022/03/14 12:02"
         },
     }
