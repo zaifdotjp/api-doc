@@ -722,11 +722,14 @@ invalid vasp_name format                        送金先の形式が正しく�
 ```
 
 #### 補足
-* kind、beneficiary_name、vasp_master_id、vasp_nameは、
+* パラメータ“kind“、“beneficiary_name“、“vasp_master_id“、“vasp_name“は、
 addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されている場合、それらの値が適用されます。
 （この場合、当該リクエストで上記４項目が設定されても無視されます）
-もしくはaddressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されていない場合は
+もしくは“address“に指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されていない場合は
 当該リクエストで上記４項目を必ず設定する必要があります。
+
+* パラメータ“kind“、“beneficiary_name“、“vasp_name“、“vasp_timestamp“及びそれらに関連するエラーメッセージは
+2022年4月1日より適用となります。
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -866,3 +869,4 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
 
 * “from_id”もしくは”end_id”をセットした場合、”order”は強制的に”ASC”となります。
 
+* “kind“、“beneficiary_name“、“vasp_name“、“vasp_timestamp“は2022年4月1日より取得可能となります。
