@@ -537,7 +537,7 @@ vasp_master_id 「23」（個別のID）の場合<br />
 [
     {
         "id": 23,
-        "name": "OKCoinJapan"
+        "name": "OKTaro"
     }
 ]
 ```
