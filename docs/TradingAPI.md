@@ -713,7 +713,7 @@ invalid kind                                    宛先の形式が正しくあ�
 please specify beneficiary_name                 送金先氏名を設定してください
 invalid beneficiary_name length                 送金先氏名の長さが正しくありません
 invalid beneficiary_name format                 送金先氏名の形式が正しくありません
-please specify vasp_master_id                   VASP情報Iを設定してください
+please specify vasp_master_id                   VASP情報IDを設定してください
 invalid vasp_master_id                          VASP情報IDが正しくありません
 please specify vasp_name                        送金先を設定してください
 invalid vasp_name length                        送金先の長さが正しくありません
