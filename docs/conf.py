@@ -41,7 +41,7 @@ extensions = [
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
-source_parsers = {'.md': CommonMarkParser}
+#source_parsers = {'.md': CommonMarkParser}
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -60,7 +60,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Zaif api document'
-copyright = 'ＣＡＩＣＡ　Ｅｘｃｈａｎｇｅ　Ｉｎｃ.'
+copyright = 'ＣＡＩＣＡ Ｅｘｃｈａｎｇｅ Ｉｎｃ.'
 author = 'fcce'
 
 # The version info for the project you're documenting, acts as replacement for
