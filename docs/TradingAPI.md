@@ -848,7 +848,7 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
           "kind": "本人宛",
           "beneficiary_name": "ザイフタロウ",
           "vasp_name": "タロウ証券",
-          "vasp_timestamp": "2022/03/14 10:00"
+          "vasp_timestamp": "1435745065"
         },
         "3814":{
           "timestamp":1435548083,
@@ -858,7 +858,7 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
           "kind": "本人宛",
           "beneficiary_name": "ザイフハナコ",
           "vasp_name": "Coinhanako",
-          "vasp_timestamp": "2022/03/14 12:02"
+          "vasp_timestamp": "1435548083"
         },
     }
 }
