@@ -665,28 +665,52 @@ order is too new                                注文から一定時間の経�
 ### 出金
 
 資金の引き出しリクエストを送信します。 <br />
-2022年4月1日より、トラベルルール対応として出金時に受取人の情報が必要となりました。Zaifサイトから出金先のアドレスを登録し受取人情報を事前に登録すれば、APIからは今までどおりの出金を行うことができます。出金先アドレスに受取人情報が登録されていない場合、APIからの出金時に追加の情報(kind/beneficiary_name/vasp_master_id/vasp_name)を指定して出金することができます。<br />
+2022年4月1日より、トラベルルール対応として出金時に受取人の情報が必要となりました。（2022年10月26日より項目を追加）<br />
+Zaifサイトから出金先のアドレスを登録し受取人情報を事前に登録すれば、APIからは今までどおりの出金を行うことができます。<br />
+出金先アドレスに受取人情報が登録されていない場合、APIからの出金時に追加の情報（kind/vasp_master_id/vasp_name/beneficiary_corp_flg/other_vasp_name/<br />beneficiary_name_last_name_kana/beneficiary_name_first_name_kana/<br />beneficiary_name_last_name_en/beneficiary_name_first_name_en/<br />beneficiary_zip_code/beneficiary_country_id/beneficiary_area_jp/<br />beneficiary_area_other/transfer_tx_purpose_id/transfer_tx_purpose_other_text/<br />transfer_tx_purpose_item_text/transfer_tx_purpose_origin_text/<br />transfer_tx_purpose_port_text/transfer_tx_purpose_destination_text/<br />corp_type_id/corp_type_other_text/corp_identifier_type_position/<br />corp_name_kana/corp_name_en）を指定して出金することができます。<br />
 2015年12月15日より、Zaif内の振替を除くリクエストには一旦トランザクションIDは空で返されるようになりました。 通常１～２分でトランザクションが発生しますので、後ほどwithdraw_historyメソッドを利用して確認してください xemの出金時には、手数料は自動計算され、opt_feeに値をセットして送信しますとエラーが返されますのでご注意ください。 不正送金の対策として、アカウントに対する最初の日本円入金から７日間は、APIによる仮想通貨の出金を制限しております。<br />
 ZaifからのXEMの出金はmultisigトランザクションになります。<br />
 multisigトランザクションに対応していない他の取引所やサービスへ送金されましても、Zaifでは対応致し兼ねますのでご注意ください。<br />
 
 #### パラメータ
 ```eval_rst
-================= ==== ================================================================================================ ============ =========
-パラメータ        必須 詳細                                                                                             型           デフォルト
-================= ==== ================================================================================================ ============ =========
-method            Yes  withdraw                                                                                         str
-currency          Yes  引き出す通貨。現物公開APIのcurrenciesで取得できるものが指定できます。ただしjpyは指定できません。 str(例)btc等
-address           Yes  送信先のアドレス                                                                                 str
-message           No   送信メッセージ(XEMのみ)                                                                          ASCII str
-amount            Yes  出金額                                                                                           numerical
-opt_fee           No   採掘者への手数料。ただしcurrencyがbtc、mona以外の時に指定するとエラーとなります。                numerical
-kind              No   (self：本人宛、other：それ以外)　左記文字列のみ使用可能                                          str
-beneficiary_name  No   max：100文字まで 全角カナと全角スペースのみ使用可能                                              str
-vasp_master_id    No   現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                       str
-vasp_name         No   vasp_master_id　が 1(その他）の場合のみ指定必須。max：100文字まで                                str
-================= ==== ================================================================================================ ============ =========
+
+========================================= ==== ==================================================================================================================================================================================== ============== ===========
+パラメータ                                必須 詳細                                                                                                                                                                                 型             デフォルト
+========================================= ==== ==================================================================================================================================================================================== ============== ===========
+method                                    Yes   withdraw                                                                                                                                                                            str
+currency                                  Yes   引き出す通貨。現物公開APIのcurrenciesで取得できるものが指定できます。ただしjpyは指定できません。                                                                                    str(例)btc等
+address                                   Yes   送信先のアドレス                                                                                                                                                                    str
+message                                   No    送信メッセージ(XEMのみ)                                                                                                                                                             ASCII　str
+amount                                    Yes   出金額                                                                                                                                                                              numerical
+opt_fee                                   No    採掘者への手数料。ただしcurrencyがbtc、mona以外の時に指定するとエラーとなります。                                                                                                   numerical
+kind                                      No    (self：本人宛、other：それ以外)　左記文字列のみ使用可能                                                                                                                             str
+beneficiary_corp_flg                      No   送金先の種別　(1：個人、2：法人)　左記のみ使用可能 kindでselfを指定した場合は不要、otherを指定した場合は必須                                                                         str
+other_vasp_name                           No   送金先の名称　vasp_master_id　でvasp情報IDに「1：その他」指定した場合は必須 max：100文字まで                                                                                         str
+beneficiary_name_last_name_kana           No   送金先氏名（カナ）姓　個人の場合必須　max：100文字まで                                                                                                                               str
+beneficiary_name_first_name_kana          No   送金先氏名（カナ）名　個人の場合必須　max：100文字まで                                                                                                                               str
+beneficiary_name_last_name_en             No   送金先氏名（英字）姓　個人の場合必須　半角英字（大文字）のみ使用可能 max：100文字まで                                                                                                str
+beneficiary_name_first_name_en            No   送金先氏名（英字）名　個人の場合必須　半角英字（大文字）のみ使用可能 max：100文字まで                                                                                                str
+beneficiary_zip_code                      Yes  送金先の郵便番号　max：100文字まで 半角英数字（大文字）のみ使用可能                                                                                                                  str
+beneficiary_country_id                    Yes  送金先の相手国　現物公開API　country_info　で取得したcodeを指定する。左記以外は不可                                                                                                  str
+beneficiary_area_jp                       No   送金先の地域（日本）　beneficiary_country_idで「JP」を指定した場合は必須 max：100文字まで                                                                                            str
+beneficiary_area_other                    No   送金先の地域（日本以外）beneficiary_country_idで「JP」以外を指定した場合は必須 max：100文字まで                                                                                      str
+transfer_tx_purpose_id                    Yes  移転取引の目的 以下のみ指定可能（1：送付先VASPの提供する交換業に係るサービスの利用、2：国内の商品代金、3：相続、生活費の贈与、4：輸入代金の決済、5：仲介貿易代金の決済、99：その他） numerical
+transfer_tx_purpose_other_text            No   移転取引の目的（具体的な内容）max：300文字まで 移転取引の目的で「99：その他」を指定した場合必須                                                                                      str
+transfer_tx_purpose_item_text             No   移転取引の目的（商品の具体的な品目）max：300文字まで  移転取引の目的で「4：輸入代金の決済」もしくは「5：仲介貿易代金の決済」を指定した場合必須                                       str
+transfer_tx_purpose_origin_text           No   移転取引の目的（原産地）max：300文字まで  移転取引の目的で「4：輸入代金の決済」もしくは「5：仲介貿易代金の決済」を指定した場合必須                                                   str
+transfer_tx_purpose_port_text             No   移転取引の目的（船積地）max：300文字まで 移転取引の目的で「4：輸入代金の決済」もしくは「5：仲介貿易代金の決済」を指定した場合必須                                                    str
+transfer_tx_purpose_destination_text      No   移転取引の目的（仕向地）max：300文字まで 移転取引の目的で「5：仲介貿易代金の決済」を指定した場合必須                                                                                 str
+corp_type_id                              No   法人種別 現物公開API corp_type_id_info で取得したidを指定する。左記以外は不可                                                                                                        numerical
+corp_type_other_text                      No   法人種別の名称 corp_type_id　で「1 ：その他」を指定した場合は入力必須 max：300文字まで                                                                                               str
+corp_identifier_type_position             No   法人格の位置   （1： 前、 2：後）　左記のみ指定可能                                                                                                                                  numerical
+corp_name_kana                            No   送金先名称（カナ）法人の場合必須　max：100文字まで 全角カナと全角スペースのみ使用可能                                                                                                str
+corp_name_en                              No   送金先名称（アルファベット）法人の場合必須　max：100文字まで 半角の英字、.(ピリオド)、,(カンマ)、『 』(スペース)のみ使用可能                                                         str
+vasp_master_id                            No   現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                                                                                                           str
+vasp_name                                 No   vasp_master_id　が 1(その他）の場合のみ指定必須。max：100文字まで                                                                                                                    str
+========================================= ==== ==================================================================================================================================================================================== ============== ===========
 ```
+
 
 #### 戻り値
 ```eval_rst
@@ -718,33 +742,79 @@ funds 残高                           dict
 
 #### エラーメッセージ
 ```eval_rst
-=============================================== ===================================================================
-メッセージ                                      詳細
-=============================================== ===================================================================
-kyc is not finished                             郵送による本人確認が完了していません。
-insufficient funds                              取引に必要な残高が存在しません。
-please specify kind                             宛先を設定してください
-invalid kind                                    宛先の形式が正しくありません
-please specify beneficiary_name                 送金先氏名を設定してください
-invalid beneficiary_name length                 送金先氏名の長さが正しくありません
-invalid beneficiary_name format                 送金先氏名の形式が正しくありません
-please specify vasp_master_id                   VASP情報IDを設定してください
-invalid vasp_master_id                          VASP情報IDが正しくありません
-please specify vasp_name                        送金先を設定してください
-invalid vasp_name length                        送金先の長さが正しくありません
-invalid vasp_name format                        送金先の形式が正しくありません
-=============================================== ===================================================================
+=================================================== ===================================================================
+メッセージ                                          詳細
+=================================================== ===================================================================
+kyc is not finished                                 郵送による本人確認が完了していません。
+insufficient funds                                  取引に必要な残高が存在しません。
+please specify kind                                 宛先を設定してください
+invalid kind                                        宛先の形式が正しくありません
+please specify beneficiary_corp_flg                 送金先の種別を指定してください
+invalid beneficiary_corp_flg                        送金先の種別の形式が正しくありません
+please specify vasp_name                            送金先「その他」を具体的に入力してください
+invalid vasp_name length                            送金先「その他」の長さが正しくありません
+invalid vasp_name format                            送金先「その他」の形式が正しくありません
+please specify beneficiary_name_last_name_kana      送金先氏名（カナ）（姓）を指定してください
+invalid beneficiary_name_last_name_kana length      送金先氏名（カナ）（姓）の長さが正しくありません
+invalid beneficiary_name_last_name_kana format      送金先氏名（カナ）（姓）の形式が正しくありません
+please specify beneficiary_name_first_name_kana     送金先氏名（カナ）（名）を指定してください
+invalid beneficiary_name_first_name_kana length     送金先氏名（カナ）（名）の長さが正しくありません
+invalid beneficiary_name_first_name_kana format     送金先氏名（カナ）（名）の形式が正しくありません
+please specify beneficiary_name_last_name_en        送金先氏名（アルファベット）（姓）を指定してください
+invalid beneficiary_name_last_name_en length        送金先氏名（アルファベット）（姓）の長さが正しくありません
+invalid beneficiary_name_last_name_en format        送金先氏名（アルファベット）（姓）の形式が正しくありません
+please specify beneficiary_name_first_name_en       送金先氏名（アルファベット）（名）を指定してください
+invalid beneficiary_name_first_name_en length       送金先氏名（アルファベット）（名）の長さが正しくありません
+invalid beneficiary_name_first_name_en format       送金先氏名（アルファベット）（名）の形式が正しくありません
+please specify corp_type_id                         法人種別を指定してください
+invalid corp_type_id format                         法人種別の形式が正しくありません
+please specify corp_type_other_text                 法人種別の具体的な名称を指定してください
+invalid corp_type_other_text length                 法人種別の具体的な名称の長さが正しくありません
+invalid corp_type_other_text format                 法人種別の具体的な名称の形式が正しくありません
+please specify corp_identifier_type_position        法人格（位置）を指定してください
+invalid corp_identifier_type_position format        法人格（位置）の形式が正しくありません
+please specify corp_name_kana                       送金先名称（カナ）を指定してください
+invalid corp_name_kana length                       送金先名称（カナ）の長さが正しくありません
+invalid corp_name_kana format                       送金先名称（カナ）の形式が正しくありません
+please specify corp_name_en                         送金先名称（アルファベット）を指定してください
+invalid corp_name_en length                         送金先名称（アルファベット）の長さが正しくありません
+invalid corp_name_en format                         送金先名称（アルファベット）の形式が正しくありません
+please specify beneficiary_zip_code                 送金先の郵便番号を指定してください
+invalid beneficiary_zip_code length                 送金先の郵便番号の長さが正しくありません
+invalid beneficiary_zip_code format                 送金先の郵便番号の形式が正しくありません
+please specify beneficiary_country_id               送金先（相手国）を指定してください
+invalid beneficiary_country_id format               送金先（相手国）の形式が正しくありません
+please specify beneficiary_area_jp                  送金先の地域（日本）を指定してください
+invalid beneficiary_area_jp length                  送金先の地域（日本）の形式が正しくありません
+please specify beneficiary_area_other               送金先の地域（日本以外）を指定してください
+invalid beneficiary_area_other length               送金先の地域（日本以外）の形式が正しくありません
+please specify transfer_tx_purpose_id               移転取引の目的を指定してください
+invalid transfer_tx_purpose_id format               移転取引の目的の形式が正しくありません
+please specify transfer_tx_purpose_other_text       移転取引の目的について具体的な内容を指定してください
+invalid transfer_tx_purpose_other_text length       移転取引の目的の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_item_text        移転取引の目的（商品の具体的な品目）について<br>具体的な内容を指定してください
+invalid transfer_tx_purpose_item_text length        移転取引の目的（商品の具体的な品目）の<br>具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_origin_text      移転取引の目的（原産地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_origin_text length      移転取引の目的（原産地）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_port_text        移転取引の目的（船積地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_port_text length        移転取引の目的（船積地）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_destination_text 移転取引の目的（仕向地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_destination_text length 移転取引の目的（仕向地）の具体的な内容の長さが正しくありません
+please specify vasp_master_id                       VASP情報IDを設定してください
+invalid vasp_master_id                              VASP情報IDが正しくありません
+please specify vasp_name                            送金先を設定してください
+invalid vasp_name length                            送金先の長さが正しくありません
+invalid vasp_name format                            送金先の形式が正しくありません
+=================================================== ===================================================================
 ```
 
-#### 補足
-* パラメータ“kind“、“beneficiary_name“、“vasp_master_id“、“vasp_name“は、
-addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されている場合、それらの値が適用されます。
-（この場合、当該リクエストで上記４項目が設定されても無視されます）
-もしくは“address“に指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の４項目が設定されていない場合は
-当該リクエストで上記４項目を必ず設定する必要があります。
 
-* パラメータ“kind“、“beneficiary_name“、“vasp_name“、“vasp_timestamp“及びそれらに関連するエラーメッセージは
-2022年4月1日より適用となります。
+``` note::
+    * パラメータ“kind“、“vasp_master_id“、“vasp_name“、“beneficiary_corp_flg“、  “other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“は、    addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の項目が設定されている場合、それらの値が適用されます。    （この場合、当該リクエストで上記項目が設定されても無視されます）    もしくは“address“に指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の項目が設定されていない場合は    当該リクエストで上記項目を必ず設定する必要があります。
+    * “kind“、“vasp_name“、“vasp_timestamp“及びそれらに関連するエラーメッセージは2022年4月1日より適用となります。
+    * “beneficiary_name“は2022年10月26日より未使用項目となります。
+    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“  及びそれらに関連するエラーメッセージは2022年10月26日より取得可能となります。
+```
 
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -835,19 +905,39 @@ end        No   終了タイムスタンプ           UNIX_TIMESTAMP    infinity
 
 #### 戻り値
 ```eval_rst
-================= ================== ==============
-キー      詳細               型
-================= ================== ==============
-timestamp         出金日時           UNIX_TIMESTAMP
-address           出金先アドレス     str
-amount            取引量             float
-txid              トランザクションID str
-kind              宛先               str
-beneficiary_name  送金先氏名         str
-vasp_master_id    VASP情報ID         str
-vasp_name         送金先             str
-vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
-================= ================== ==============
+===================================== ======================================== ==============
+キー                                  詳細                                     型
+===================================== ======================================== ==============
+timestamp                             出金日時                                 UNIX_TIMESTAMP
+address                               出金先アドレス                           str
+amount                                取引量                                   float
+txid                                  トランザクションID                       str
+kind                                  宛先                                     str
+beneficiary_corp_flg                  送金先の種別 (1：個人、2：法人)          str
+other_vasp_name                       送金先の名称                             str
+beneficiary_name_last_name_kana       送金先氏名（カナ）姓 （個人のみ）        str
+beneficiary_name_first_name_kana      送金先氏名（カナ）名 （個人のみ）        str
+beneficiary_name_last_name_en         送金先氏名（英字）姓 （個人のみ）        str
+beneficiary_name_first_name_en        送金先氏名（英字）名 （個人のみ）        str
+beneficiary_zip_code                  送金先の郵便番号                         str
+beneficiary_country_id                送金先の相手国                           str
+beneficiary_area_jp                   送金先の地域（日本）                     str
+beneficiary_area_other                送金先の地域（日本以外）                 str
+transfer_tx_purpose_id                移転取引の目的                           numerical
+transfer_tx_purpose_other_text        移転取引の目的（具体的な内容）           str
+transfer_tx_purpose_item_text         移転取引の目的（商品の具体的な品目）     str
+transfer_tx_purpose_origin_text       移転取引の目的（原産地）                 str
+transfer_tx_purpose_port_text         移転取引の目的（船積地）                 str
+transfer_tx_purpose_destination_text  移転取引の目的（仕向地）                 str
+corp_type_id                          法人種別 （法人のみ）                    numerical
+corp_type_other_text                  法人種別の名称（法人のみ）               str
+corp_identifier_type_position         法人格の位置（法人のみ）                 numerical
+corp_name_kana                        送金先名称（カナ）（法人のみ）           str
+corp_name_en                          送金先名称（アルファベット）（法人のみ） str
+vasp_master_id                        VASP情報ID                               str
+vasp_name                             送金先                                   str
+vasp_timestamp                        VASP情報登録日時                         UNIX_TIMESTAMP
+===================================== ======================================== ==============
 ```
 
 ```
@@ -860,7 +950,18 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
           "amount":0.001,
           "txid":"64dcf59523379ba282ae8cd61d2e9382c7849afe3a3802c0abb08a60067a159f",
           "kind": "本人宛",
-          "beneficiary_name": "ザイフタロウ",
+          "beneficiary_corp_flg": "1",
+          "beneficiary_name_last_name_kana": "ザイフ",
+          "beneficiary_name_first_name_kana": "タロウ",
+          "beneficiary_name_last_name_en": "ZAIF",
+          "beneficiary_name_first_name_en": "TARO",
+          "beneficiary_zip_code": "0000001",
+          "beneficiary_country_id": "JP",
+          "beneficiary_area_jp": "北海道",
+          "transfer_tx_purpose_id": "4",
+          "transfer_tx_purpose_item_text": "かばん",
+          "transfer_tx_purpose_origin_text": "アメリカ",
+          "transfer_tx_purpose_port_text": "CA",
           "vasp_name": "タロウ証券",
           "vasp_timestamp": "1435745065"
         },
@@ -869,8 +970,19 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
           "address":"12qwQ3sPJJAosodSUhSpMds4WfUPBeFEM2",
           "amount":0.001,
           "txid":"7d012cfff6e67a8938f93215367eef4177604459631ea62c85550980dca71819",
-          "kind": "本人宛",
-          "beneficiary_name": "ザイフハナコ",
+          "kind": "それ以外",
+          "beneficiary_corp_flg": "2",
+          "corp_name_kana": "ザイフ",
+          "corp_name_en": "ZAIF",
+          "beneficiary_zip_code": "0000001",
+          "beneficiary_country_id": "JP",
+          "beneficiary_area_jp": "北海道",
+          "transfer_tx_purpose_id": "5",
+          "transfer_tx_purpose_other_text": "財産譲渡のため",
+          "transfer_tx_purpose_origin_text": "アメリカ",
+          "transfer_tx_purpose_port_text": "CA",
+          "corp_type_id": "3",
+          "corp_identifier_type_position": "1",
           "vasp_name": "Coinhanako",
           "vasp_timestamp": "1435548083"
         },
@@ -885,5 +997,9 @@ vasp_timestamp    VASP情報登録日時   UNIX_TIMESTAMP
 
 * “from_id”もしくは”end_id”をセットした場合、”order”は強制的に”ASC”となります。
 
-* “kind“、“beneficiary_name“、“vasp_name“、“vasp_timestamp“は2022年4月1日より取得可能となります。
 
+``` note::
+    * “kind“、“vasp_name“、“vasp_timestamp“は2022年4月1日より取得可能となります。
+    * “beneficiary_name“は2022年10月26日より取得できなくなります。
+    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“  は2022年10月26日より取得可能となります。
+```
