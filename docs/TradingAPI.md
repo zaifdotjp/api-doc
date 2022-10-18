@@ -810,15 +810,15 @@ invalid beneficiary_zip_code format                 送金先の郵便番号の�
 please specify beneficiary_country_id               送金先（相手国）を指定してください
 invalid beneficiary_country_id format               送金先（相手国）の形式が正しくありません
 please specify beneficiary_area_jp                  送金先の地域（日本）を指定してください
-invalid beneficiary_area_jp length                  送金先の地域（日本）の形式が正しくありません
+invalid beneficiary_area_jp length                  送金先の地域（日本）の長さが正しくありません
 please specify beneficiary_area_other               送金先の地域（日本以外）を指定してください
-invalid beneficiary_area_other length               送金先の地域（日本以外）の形式が正しくありません
+invalid beneficiary_area_other length               送金先の地域（日本以外）の長さが正しくありません
 please specify transfer_tx_purpose_id               移転取引の目的を指定してください
 invalid transfer_tx_purpose_id format               移転取引の目的の形式が正しくありません
 please specify transfer_tx_purpose_other_text       移転取引の目的について具体的な内容を指定してください
 invalid transfer_tx_purpose_other_text length       移転取引の目的の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_item_text        移転取引の目的（商品の具体的な品目）について<br>具体的な内容を指定してください
-invalid transfer_tx_purpose_item_text length        移転取引の目的（商品の具体的な品目）の<br>具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_item_text        移転取引の目的（商品の具体的な品目）について具体的な内容を指定してください
+invalid transfer_tx_purpose_item_text length        移転取引の目的（商品の具体的な品目）の具体的な内容の長さが正しくありません
 please specify transfer_tx_purpose_origin_text      移転取引の目的（原産地）について具体的な内容を指定してください
 invalid transfer_tx_purpose_origin_text length      移転取引の目的（原産地）の具体的な内容の長さが正しくありません
 please specify transfer_tx_purpose_port_text        移転取引の目的（船積地）について具体的な内容を指定してください
@@ -940,10 +940,8 @@ txid                                  トランザクションID                
 kind                                  宛先                                     str
 beneficiary_corp_flg                  送金先の種別 (1：個人、2：法人)          str
 other_vasp_name                       送金先の名称                             str
-beneficiary_name_last_name_kana       送金先氏名（カナ）姓 （個人のみ）        str
-beneficiary_name_first_name_kana      送金先氏名（カナ）名 （個人のみ）        str
-beneficiary_name_last_name_en         送金先氏名（英字）姓 （個人のみ）        str
-beneficiary_name_first_name_en        送金先氏名（英字）名 （個人のみ）        str
+beneficiary_name                      送金先氏名（カナ）（個人のみ）           str
+beneficiary_name_en                   送金先氏名（英字）（個人のみ）           str
 beneficiary_zip_code                  送金先の郵便番号                         str
 beneficiary_country_id                送金先の相手国                           str
 beneficiary_area_jp                   送金先の地域（日本）                     str
@@ -954,8 +952,8 @@ transfer_tx_purpose_item_text         移転取引の目的（商品の具体的
 transfer_tx_purpose_origin_text       移転取引の目的（原産地）                 str
 transfer_tx_purpose_port_text         移転取引の目的（船積地）                 str
 transfer_tx_purpose_destination_text  移転取引の目的（仕向地）                 str
-corp_type_id                          法人種別 （法人のみ）                    numerical
-corp_type_other_text                  法人種別の名称（法人のみ）               str
+corp_type                             法人種別名称 （法人のみ）                str
+corp_type_other_text                  法人種別その他名称（法人のみ）           str
 corp_identifier_type_position         法人格の位置（法人のみ）                 numerical
 corp_name_kana                        送金先名称（カナ）（法人のみ）           str
 corp_name_en                          送金先名称（アルファベット）（法人のみ） str
@@ -976,10 +974,8 @@ vasp_timestamp                        VASP情報登録日時                    
           "txid":"64dcf59523379ba282ae8cd61d2e9382c7849afe3a3802c0abb08a60067a159f",
           "kind": "本人宛",
           "beneficiary_corp_flg": "1",
-          "beneficiary_name_last_name_kana": "ザイフ",
-          "beneficiary_name_first_name_kana": "タロウ",
-          "beneficiary_name_last_name_en": "ZAIF",
-          "beneficiary_name_first_name_en": "TARO",
+          "beneficiary_name": "ザイフ　タロウ",
+          "beneficiary_name_en": "TARO　ZAIF",
           "beneficiary_zip_code": "0000001",
           "beneficiary_country_id": "JP",
           "beneficiary_area_jp": "北海道",
@@ -1006,7 +1002,7 @@ vasp_timestamp                        VASP情報登録日時                    
           "transfer_tx_purpose_other_text": "財産譲渡のため",
           "transfer_tx_purpose_origin_text": "アメリカ",
           "transfer_tx_purpose_port_text": "CA",
-          "corp_type_id": "3",
+          "corp_type": "有限会社",
           "corp_identifier_type_position": "1",
           "vasp_name": "Coinhanako",
           "vasp_timestamp": "1435548083"
@@ -1025,6 +1021,5 @@ vasp_timestamp                        VASP情報登録日時                    
 
 ``` note::
     * “kind“、“vasp_name“、“vasp_timestamp“は2022年4月1日より取得可能となります。
-    * “beneficiary_name“は2022年10月26日より取得できなくなります。
-    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“  は2022年10月26日より取得可能となります。
+    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name“、  “beneficiary_name_en“、  “beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“  は2022年10月26日より取得可能となります。
 ```
