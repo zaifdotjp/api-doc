@@ -733,6 +733,7 @@ corp_name_kana                            No   送金先名称（カナ）法人
 corp_name_en                              No   送金先名称（アルファベット）法人の場合必須　max：100文字まで 半角の英字、.(ピリオド)、,(カンマ)、『 』(スペース)のみ使用可能                                                         str
 vasp_master_id                            No   現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                                                                                                           str
 vasp_name                                 No   vasp_master_id　が 1(その他）の場合のみ指定必須。max：100文字まで                                                                                                                    str
+agreed                                    Yes  同意状態（True：同意、False：非同意）                                                                                                                                                bool
 ========================================= ==== ==================================================================================================================================================================================== ============== ===========
 ```
 
@@ -830,6 +831,8 @@ invalid vasp_master_id                              VASP情報IDが正しくあ�
 please specify vasp_name                            送金先を設定してください
 invalid vasp_name length                            送金先の長さが正しくありません
 invalid vasp_name format                            送金先の形式が正しくありません
+invalid agreed parameter                            同意状態の形式が正しくありません
+invalid agreement state                             同意状態を同意（True）で設定してください
 =================================================== ===================================================================
 ```
 
@@ -838,8 +841,14 @@ invalid vasp_name format                            送金先の形式が正し�
     * パラメータ“kind“、“vasp_master_id“、“vasp_name“、“beneficiary_corp_flg“、  “other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“は、    addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の項目が設定されている場合、それらの値が適用されます。    （この場合、当該リクエストで上記項目が設定されても無視されます）    もしくは“address“に指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の項目が設定されていない場合は    当該リクエストで上記項目を必ず設定する必要があります。
     * “kind“、“vasp_name“、“vasp_timestamp“及びそれらに関連するエラーメッセージは2022年4月1日より適用となります。
     * “beneficiary_name“は2022年10月26日より未使用項目となります。
-    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“  及びそれらに関連するエラーメッセージは2022年10月26日より取得可能となります。
+    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“、“agreed“  及びそれらに関連するエラーメッセージは2022年10月26日より取得可能となります。
 ```
+
+※「agreed」パラメータにtrueを指定して行われた全ての送金について、以下内容に同意したものとみなします。
+* 弊社の[利用規約](https://zaif.jp/terms)を遵守します。
+* イラン・北朝鮮への送金ではありません。
+* 法令等（外為法・米国OFAC等）の規制に抵触いたしません。
+* 送金先及び送金先の実質的支配者が規制対象者ではありません。
 
 
 ------------------------------------------------------------------------------------------------------------------------
