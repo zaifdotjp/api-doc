@@ -968,6 +968,7 @@ corp_name_en                          送金先名称（アルファベット）
 vasp_master_id                        VASP情報ID                               str
 vasp_name                             送金先                                   str
 vasp_timestamp                        VASP情報登録日時                         UNIX_TIMESTAMP
+agreed                                同意状態                                 str
 ===================================== ======================================== ==============
 ```
 
@@ -992,7 +993,8 @@ vasp_timestamp                        VASP情報登録日時                    
           "transfer_tx_purpose_origin_text": "アメリカ",
           "transfer_tx_purpose_port_text": "CA",
           "vasp_name": "タロウ証券",
-          "vasp_timestamp": "1435745065"
+          "vasp_timestamp": "1435745065",
+          "agreed": "同意済",
         },
         "3814":{
           "timestamp":1435548083,
@@ -1011,7 +1013,8 @@ vasp_timestamp                        VASP情報登録日時                    
           "corp_type": "有限会社",
           "corp_identifier_type_position": "前",
           "vasp_name": "Coinhanako",
-          "vasp_timestamp": "1435548083"
+          "vasp_timestamp": "1435548083",
+          "agreed": "同意済",
         },
     }
 }
@@ -1027,5 +1030,5 @@ vasp_timestamp                        VASP情報登録日時                    
 
 ``` note::
     * “kind“、“vasp_name“、“vasp_timestamp“は2022年4月1日より取得可能となります。
-    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name“、  “beneficiary_name_en“、  “beneficiary_zip_code“、“beneficiary_country“、  “beneficiary_area“、“transfer_tx_purpose“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“  は2022年10月26日より取得可能となります。
+    * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name“、  “beneficiary_name_en“、  “beneficiary_zip_code“、“beneficiary_country“、  “beneficiary_area“、“transfer_tx_purpose“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“、“agreed“  は2022年10月26日より取得可能となります。
 ```
