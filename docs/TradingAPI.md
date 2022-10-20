@@ -716,7 +716,7 @@ beneficiary_name_last_name_kana           No   送金先氏名（カナ）姓　
 beneficiary_name_first_name_kana          No   送金先氏名（カナ）名　個人の場合必須　max：100文字まで                                                                                                                               str
 beneficiary_name_last_name_en             No   送金先氏名（英字）姓　個人の場合必須　半角英字（大文字）のみ使用可能 max：100文字まで                                                                                                str
 beneficiary_name_first_name_en            No   送金先氏名（英字）名　個人の場合必須　半角英字（大文字）のみ使用可能 max：100文字まで                                                                                                str
-beneficiary_zip_code                      Yes  送金先の郵便番号　max：100文字まで 半角英数字（大文字）のみ使用可能                                                                                                                  str
+beneficiary_zip_code                      Yes  送金先の郵便番号　max：100文字まで beneficiary_country_idで「JP」を指定した場合は半角数字のみ、「JP」以外を指定した場合は半角英数字（大文字）のみ使用可能                            str
 beneficiary_country_id                    Yes  送金先の相手国　現物公開API　country_info　で取得したcodeを指定する。左記以外は不可                                                                                                  str
 beneficiary_area_jp                       No   送金先の地域（日本）　beneficiary_country_idで「JP」を指定した場合は必須 max：100文字まで                                                                                            str
 beneficiary_area_other                    No   送金先の地域（日本以外）beneficiary_country_idで「JP」以外を指定した場合は必須 max：100文字まで                                                                                      str
@@ -733,7 +733,7 @@ corp_name_kana                            No   送金先名称（カナ）法人
 corp_name_en                              No   送金先名称（アルファベット）法人の場合必須　max：100文字まで 半角の英字、.(ピリオド)、,(カンマ)、『 』(スペース)のみ使用可能                                                         str
 vasp_master_id                            No   現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                                                                                                           str
 vasp_name                                 No   vasp_master_id　が 1(その他）の場合のみ指定必須。max：100文字まで                                                                                                                    str
-agreed                                    Yes  同意状態（True：同意、False：非同意）                                                                                                                                                bool
+agreed                                    Yes  同意状態（True：同意、False：非同意）同意していただく内容については下記をご参照ください                                                                                              bool
 ========================================= ==== ==================================================================================================================================================================================== ============== ===========
 ```
 
