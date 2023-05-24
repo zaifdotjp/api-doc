@@ -191,7 +191,7 @@ server_time UNIX時間で換算された日本時間 int
 * 呼び出しは10秒間に10回以下におさまるようにしてください。呼び出しが多すぎるとアクセス拒否されることがあります。[（※）](<trading_notice_1>)
 
 
-	
+
 * deposit算出方法
 
 	depositは現在の資産の残高に注文情報を加味したものになります。
@@ -262,7 +262,7 @@ server_time UNIX時間で換算された日本時間 int
 
 #### 補足
 * 呼び出しは10秒間に20回以下におさまるようにしてください。呼び出しが多すぎるとアクセス拒否されることがあります。[（※）](<trading_notice_1>)
-	
+
 * deposit算出方法
 
 	depositは現在の資産の残高に注文情報を加味したものになります。
@@ -331,7 +331,7 @@ email     メールアドレス   str
 name      ユーザ名         int
 kana      ユーザ名カナ     str
 certified 認証済みかどうか bool
-========= ================ ==== 
+========= ================ ====
 ```
 ```
 {
@@ -352,7 +352,7 @@ certified 認証済みかどうか bool
 =============== ==== ======================================== ================= ===========
 パラメータ      必須 詳細                                     型                デフォルト
 =============== ==== ======================================== ================= ===========
-method          Yes  trade_history                            str            
+method          Yes  trade_history                            str
 from            No   この順番のレコードから取得               int               0
 count           No   取得するレコード数                       int               1000
 from_id         No   このトランザクションIDのレコードから取得 int               0
@@ -418,7 +418,7 @@ is_token        No   カウンターパーティトークンかどうか       b
 * 呼び出しは60秒間に12回以下におさまるようにしてください。呼び出しが多すぎるとアクセス拒否されることがあります。[（※）](<trading_notice_1>)
 
 * “since”もしくは”end”をセットした場合、”order”は強制的に”ASC”となります。
-	
+
 * “from_id”もしくは”end_id”をセットした場合、”order”は強制的に”ASC”となります。
 
 * “currency_pair”と”is_token”の両方を指定した場合は”currency_pair”が優先されます。両方指定しない場合はカウンターパーティトークン以外の情報を取得します。
@@ -523,13 +523,13 @@ is_token_bothがtrueの時は下記
 ============= ==== ====================== ===================== ===========
 パラメータ    必須 詳細                   型                    デフォルト
 ============= ==== ====================== ===================== ===========
-method        Yes  trade                  str                   
-currency_pair Yes  通貨ペア               str(例)btc_jpy	
+method        Yes  trade                  str
+currency_pair Yes  通貨ペア               str(例)btc_jpy
 action        Yes  bid(買い) or ask(売り) str
-price         Yes  指値注文価格           numerical	
-amount        Yes  数量                   numerical	
-limit         No   リミット注文価格       numerical	
-comment       No   コメントの追加         str	
+price         Yes  指値注文価格           numerical
+amount        Yes  数量                   numerical
+limit         No   リミット注文価格       numerical
+comment       No   コメントの追加         str
 ============= ==== ====================== ===================== ===========
 ```
 
@@ -719,7 +719,7 @@ beneficiary_name_first_name_en            No   送金先氏名（英字）名　
 beneficiary_zip_code                      Yes  送金先の郵便番号　max：100文字まで beneficiary_country_idで「JP」を指定した場合は半角数字のみ、「JP」以外を指定した場合は半角英数字（大文字）のみ使用可能                            str
 beneficiary_country_id                    Yes  送金先の相手国　現物公開API　country_info　で取得したcodeを指定する。左記以外は不可                                                                                                  str
 beneficiary_area_jp                       No   送金先の地域（日本）　beneficiary_country_idで「JP」を指定した場合は必須 max：100文字まで                                                                                            str
-beneficiary_area_other                    No   送金先の地域（日本以外）beneficiary_country_idで「JP」以外を指定した場合は必須 max：100文字まで                                                                                      str
+beneficiary_area_other                    No   送金先の地域（日本以外）beneficiary_country_idで「JP」以外を指定した場合は必須 max：300文字まで                                                                                      str
 transfer_tx_purpose_id                    Yes  移転取引の目的 以下のみ指定可能（1：送付先VASPの提供する交換業に係るサービスの利用、2：国内の商品代金、3：相続、生活費の贈与、4：輸入代金の決済、5：仲介貿易代金の決済、99：その他） numerical
 transfer_tx_purpose_other_text            No   移転取引の目的（具体的な内容）max：300文字まで 移転取引の目的で「99：その他」を指定した場合必須                                                                                      str
 transfer_tx_purpose_item_text             No   移転取引の目的（商品の具体的な品目）max：300文字まで  移転取引の目的で「4：輸入代金の決済」もしくは「5：仲介貿易代金の決済」を指定した場合必須                                       str
@@ -768,77 +768,91 @@ funds 残高                           dict
 
 #### エラーメッセージ
 ```eval_rst
-=================================================== ===================================================================
-メッセージ                                          詳細
-=================================================== ===================================================================
-kyc is not finished                                 郵送による本人確認が完了していません。
-insufficient funds                                  取引に必要な残高が存在しません。
-please specify kind                                 宛先を設定してください
-invalid kind                                        宛先の形式が正しくありません
-please specify beneficiary_corp_flg                 送金先の種別を指定してください
-invalid beneficiary_corp_flg                        送金先の種別の形式が正しくありません
-please specify vasp_name                            送金先「その他」を具体的に入力してください
-invalid vasp_name length                            送金先「その他」の長さが正しくありません
-invalid vasp_name format                            送金先「その他」の形式が正しくありません
-please specify beneficiary_name_last_name_kana      送金先氏名（カナ）（姓）を指定してください
-invalid beneficiary_name_last_name_kana length      送金先氏名（カナ）（姓）の長さが正しくありません
-invalid beneficiary_name_last_name_kana format      送金先氏名（カナ）（姓）の形式が正しくありません
-please specify beneficiary_name_first_name_kana     送金先氏名（カナ）（名）を指定してください
-invalid beneficiary_name_first_name_kana length     送金先氏名（カナ）（名）の長さが正しくありません
-invalid beneficiary_name_first_name_kana format     送金先氏名（カナ）（名）の形式が正しくありません
-please specify beneficiary_name_last_name_en        送金先氏名（アルファベット）（姓）を指定してください
-invalid beneficiary_name_last_name_en length        送金先氏名（アルファベット）（姓）の長さが正しくありません
-invalid beneficiary_name_last_name_en format        送金先氏名（アルファベット）（姓）の形式が正しくありません
-please specify beneficiary_name_first_name_en       送金先氏名（アルファベット）（名）を指定してください
-invalid beneficiary_name_first_name_en length       送金先氏名（アルファベット）（名）の長さが正しくありません
-invalid beneficiary_name_first_name_en format       送金先氏名（アルファベット）（名）の形式が正しくありません
-please specify corp_type_id                         法人種別を指定してください
-invalid corp_type_id format                         法人種別の形式が正しくありません
-please specify corp_type_other_text                 法人種別の具体的な名称を指定してください
-invalid corp_type_other_text length                 法人種別の具体的な名称の長さが正しくありません
-invalid corp_type_other_text format                 法人種別の具体的な名称の形式が正しくありません
-please specify corp_identifier_type_position        法人格（位置）を指定してください
-invalid corp_identifier_type_position format        法人格（位置）の形式が正しくありません
-please specify corp_name_kana                       送金先名称（カナ）を指定してください
-invalid corp_name_kana length                       送金先名称（カナ）の長さが正しくありません
-invalid corp_name_kana format                       送金先名称（カナ）の形式が正しくありません
-please specify corp_name_en                         送金先名称（アルファベット）を指定してください
-invalid corp_name_en length                         送金先名称（アルファベット）の長さが正しくありません
-invalid corp_name_en format                         送金先名称（アルファベット）の形式が正しくありません
-please specify beneficiary_zip_code                 送金先の郵便番号を指定してください
-invalid beneficiary_zip_code length                 送金先の郵便番号の長さが正しくありません
-invalid beneficiary_zip_code format                 送金先の郵便番号の形式が正しくありません
-please specify beneficiary_country_id               送金先（相手国）を指定してください
-invalid beneficiary_country_id format               送金先（相手国）の形式が正しくありません
-please specify beneficiary_area_jp                  送金先の地域（日本）を指定してください
-invalid beneficiary_area_jp length                  送金先の地域（日本）の長さが正しくありません
-please specify beneficiary_area_other               送金先の地域（日本以外）を指定してください
-invalid beneficiary_area_other length               送金先の地域（日本以外）の長さが正しくありません
-please specify transfer_tx_purpose_id               移転取引の目的を指定してください
-invalid transfer_tx_purpose_id format               移転取引の目的の形式が正しくありません
-please specify transfer_tx_purpose_other_text       移転取引の目的について具体的な内容を指定してください
-invalid transfer_tx_purpose_other_text length       移転取引の目的の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_item_text        移転取引の目的（商品の具体的な品目）について具体的な内容を指定してください
-invalid transfer_tx_purpose_item_text length        移転取引の目的（商品の具体的な品目）の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_origin_text      移転取引の目的（原産地）について具体的な内容を指定してください
-invalid transfer_tx_purpose_origin_text length      移転取引の目的（原産地）の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_port_text        移転取引の目的（船積地）について具体的な内容を指定してください
-invalid transfer_tx_purpose_port_text length        移転取引の目的（船積地）の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_destination_text 移転取引の目的（仕向地）について具体的な内容を指定してください
-invalid transfer_tx_purpose_destination_text length 移転取引の目的（仕向地）の具体的な内容の長さが正しくありません
-please specify vasp_master_id                       VASP情報IDを設定してください
-invalid vasp_master_id                              VASP情報IDが正しくありません
-please specify vasp_name                            送金先を設定してください
-invalid vasp_name length                            送金先の長さが正しくありません
-invalid vasp_name format                            送金先の形式が正しくありません
-invalid agreed parameter                            同意状態の形式が正しくありません
-invalid agreement state                             同意状態を同意（True）で設定してください
-=================================================== ===================================================================
+============================================================================= ===================================================================
+メッセージ                                                                     詳細
+============================================================================= ===================================================================
+kyc is not finished                                                           郵送による本人確認が完了していません。
+insufficient funds                                                            取引に必要な残高が存在しません。
+please specify kind                                                           宛先を設定してください
+invalid kind                                                                  宛先の形式が正しくありません
+please specify beneficiary_corp_flg                                           送金先の種別を指定してください
+invalid beneficiary_corp_flg                                                  送金先の種別の形式が正しくありません
+please specify vasp_name                                                      送金先「その他」を具体的に入力してください
+invalid vasp_name length                                                      送金先「その他」の長さが正しくありません
+invalid vasp_name format                                                      送金先「その他」の形式が正しくありません
+please specify beneficiary_name_last_name_kana                                送金先氏名（カナ）（姓）を指定してください
+invalid beneficiary_name_last_name_kana length                                送金先氏名（カナ）（姓）の長さが正しくありません
+invalid beneficiary_name_last_name_kana format                                送金先氏名（カナ）（姓）の形式が正しくありません
+please set beneficiary_name_last_name_kana in the withdrawal address setting  送金先氏名（カナ）（姓）を出金先アドレス管理で設定してください
+please specify beneficiary_name_first_name_kana                               送金先氏名（カナ）（名）を指定してください
+invalid beneficiary_name_first_name_kana length                               送金先氏名（カナ）（名）の長さが正しくありません
+invalid beneficiary_name_first_name_kana format                               送金先氏名（カナ）（名）の形式が正しくありません
+please set beneficiary_name_first_name_kana in the withdrawal address setting 送金先氏名（カナ）（名）を出金先アドレス管理で設定してください
+please specify beneficiary_name_last_name_en                                  送金先氏名（アルファベット）（姓）を指定してください
+invalid beneficiary_name_last_name_en length                                  送金先氏名（アルファベット）（姓）の長さが正しくありません
+invalid beneficiary_name_last_name_en format                                  送金先氏名（アルファベット）（姓）の形式が正しくありません
+please set beneficiary_name_last_name_en in the withdrawal address setting    送金先氏名（アルファベット）（姓）を出金先アドレス管理で設定してください
+please specify beneficiary_name_first_name_en                                 送金先氏名（アルファベット）（名）を指定してください
+invalid beneficiary_name_first_name_en length                                 送金先氏名（アルファベット）（名）の長さが正しくありません
+invalid beneficiary_name_first_name_en format                                 送金先氏名（アルファベット）（名）の形式が正しくありません
+please set beneficiary_name_first_name_en in the withdrawal address setting   送金先氏名（アルファベット）（名）を出金先アドレス管理で設定してください
+please specify corp_type_id                                                   法人種別を指定してください
+invalid corp_type_id format                                                   法人種別の形式が正しくありません
+please set corp_type_id in the withdrawal address setting                     法人種別を出金先アドレス管理で設定してください
+please specify corp_type_other_text                                           法人種別の具体的な名称を指定してください
+invalid corp_type_other_text length                                           法人種別の具体的な名称の長さが正しくありません
+invalid corp_type_other_text format                                           法人種別の具体的な名称の形式が正しくありません
+please set corp_type_other_text in the withdrawal address setting             法人種別の具体的な名称を出金先アドレス管理で設定してください
+please specify corp_identifier_type_position                                  法人格（位置）を指定してください
+invalid corp_identifier_type_position format                                  法人格（位置）の形式が正しくありません
+please set corp_identifier_type_position in the withdrawal address setting    法人格（位置）を出金先アドレス管理で設定してください
+please specify corp_name_kana                                                 送金先名称（カナ）を指定してください
+invalid corp_name_kana length                                                 送金先名称（カナ）の長さが正しくありません
+invalid corp_name_kana format                                                 送金先名称（カナ）の形式が正しくありません
+please set corp_name_kana in the withdrawal address setting                   送金先名称（カナ）を出金先アドレス管理で設定してください
+please specify corp_name_en                                                   送金先名称（アルファベット）を指定してください
+invalid corp_name_en length                                                   送金先名称（アルファベット）の長さが正しくありません
+invalid corp_name_en format                                                   送金先名称（アルファベット）の形式が正しくありません
+please set corp_name_en in the withdrawal address setting                     送金先名称（アルファベット）を出金先アドレス管理で設定してください
+please specify beneficiary_zip_code                                           送金先の郵便番号を指定してください
+invalid beneficiary_zip_code length                                           送金先の郵便番号の長さが正しくありません
+invalid beneficiary_zip_code format                                           送金先の郵便番号の形式が正しくありません
+please set beneficiary_zip_code in the withdrawal address setting             送金先の郵便番号を出金先アドレス管理で設定してください
+please specify beneficiary_country_id                                         送金先（相手国）を指定してください
+invalid beneficiary_country_id format                                         送金先（相手国）の形式が正しくありません
+please set beneficiary_country_id in the withdrawal address setting           送金先（相手国）を出金先アドレス管理で設定してください
+please specify beneficiary_area_jp                                            送金先の地域（日本）を指定してください
+invalid beneficiary_area_jp length                                            送金先の地域（日本）の長さが正しくありません
+please set beneficiary_area_jp in the withdrawal address setting              送金先の地域（日本）を出金先アドレス管理で設定してください
+please specify beneficiary_area_other                                         送金先の地域（日本以外）を指定してください
+invalid beneficiary_area_other length                                         送金先の地域（日本以外）の長さが正しくありません
+please set beneficiary_area_other in the withdrawal address setting           送金先の地域（日本以外）を出金先アドレス管理で設定してください
+please specify transfer_tx_purpose_id                                         移転取引の目的を指定してください
+invalid transfer_tx_purpose_id format                                         移転取引の目的の形式が正しくありません
+please specify transfer_tx_purpose_other_text                                 移転取引の目的について具体的な内容を指定してください
+invalid transfer_tx_purpose_other_text length                                 移転取引の目的の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_item_text                                  移転取引の目的（商品の具体的な品目）について具体的な内容を指定してください
+invalid transfer_tx_purpose_item_text length                                  移転取引の目的（商品の具体的な品目）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_origin_text                                移転取引の目的（原産地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_origin_text length                                移転取引の目的（原産地）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_port_text                                  移転取引の目的（船積地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_port_text length                                  移転取引の目的（船積地）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_destination_text                           移転取引の目的（仕向地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_destination_text length                           移転取引の目的（仕向地）の具体的な内容の長さが正しくありません
+please specify vasp_master_id                                                 VASP情報IDを設定してください
+invalid vasp_master_id                                                        VASP情報IDが正しくありません
+please specify vasp_name                                                      送金先を設定してください
+invalid vasp_name length                                                      送金先の長さが正しくありません
+invalid vasp_name format                                                      送金先の形式が正しくありません
+invalid agreed parameter                                                      同意状態の形式が正しくありません
+invalid agreement state                                                       同意状態を同意（True）で設定してください
+============================================================================= ===================================================================
 ```
 
 
 ``` note::
     * パラメータ“kind“、“vasp_master_id“、“vasp_name“、“beneficiary_corp_flg“、  “other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“は、    addressに指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の項目が設定されている場合、それらの値が適用されます。    （この場合、当該リクエストで上記項目が設定されても無視されます）    もしくは“address“に指定したアドレスが出金先アドレス管理にて設定済みで、かつ上記の項目が設定されていない場合は    当該リクエストで上記項目を必ず設定する必要があります。
+    * 受取人を本人宛（パラメータ“kind“=“self“）とする場合、パラメータ“beneficiary_name_last_name_kana“、 “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、 “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、 “beneficiary_area_jp“、“beneficiary_area_other“、“corp_type_id“、“corp_type_other_text“、 “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“は、 予め出金先アドレス管理にて設定しておく必要があります。この場合、上記の項目は当該リクエストで設定されても無視されます。
     * “kind“、“vasp_name“、“vasp_timestamp“及びそれらに関連するエラーメッセージは2022年4月1日より適用となります。
     * “beneficiary_name“は2022年10月27日より未使用項目となります。
     * “beneficiary_corp_flg“、“other_vasp_name“、“beneficiary_name_last_name_kana“、  “beneficiary_name_first_name_kana“、“beneficiary_name_last_name_en“、  “beneficiary_name_first_name_en“、“beneficiary_zip_code“、“beneficiary_country_id“、  “beneficiary_area_jp“、“beneficiary_area_other“、“transfer_tx_purpose_id“、  “transfer_tx_purpose_other_text“、“transfer_tx_purpose_item_text“、  “transfer_tx_purpose_origin_text“、“transfer_tx_purpose_port_text“、  “transfer_tx_purpose_destination_text“、“corp_type_id“、“corp_type_other_text“、  “corp_identifier_type_position“、“corp_name_kana“、“corp_name_en“、“agreed“  及びそれらに関連するエラーメッセージは2022年10月27日より取得可能となります。
@@ -925,7 +939,7 @@ txid      トランザクションID str
 ========== ==== ============================ ================= ===========
 パラメータ 必須 詳細                         型                デフォルト
 ========== ==== ============================ ================= ===========
-method     Yes  withdraw_history             str            
+method     Yes  withdraw_history             str
 currency   Yes  通貨                         str(例)jpy 等     指定なし
 from       No   この順番のレコードから取得   int               0
 count      No   取得するレコード数           int               1000
