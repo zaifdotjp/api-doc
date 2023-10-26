@@ -2,3 +2,4 @@ sphinx
 sphinx-autobuild
 sphinx_rtd_theme
 docutils<0.18
+commonmark
