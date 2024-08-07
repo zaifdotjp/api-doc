@@ -141,7 +141,7 @@ notificationUri    No   決済完了したタイミングでの通知先URI 事�
 notificationMethod No   決済完了したタイミングでの通知先URIへ通知する際に使用されるHTTPメソッド。デフォルトはPOSTになります。                                   str GET または POST
 webhookUrl         No   決済の状態が変化したタイミングでwebhook通知を送信する先のURL。事業者様のECサイトシステムに通知を行うためのものになります。                                        str 
 redirectUri        No   決済フォームで着金後、ECサイトへ戻るためのリダイレクト先のURI。設定されなかった場合はリダイレクトせず着金後のステータスが表示されます。 str 
-currency           Yes  決済に使用する暗号通貨                                                                                                                  str btc または mona
+currency           Yes  決済に使用する暗号通貨                                                                                                                  str btc または mona または SKEB
 amount             Yes  決済金額（日本円）。実際の請求対象金額。1円単位、カンマ無し。                                                                           int 
 subTotal           No   小計（日本円）                                                                                                                          int 
 tax                No   消費税（日本円）                                                                                                                        int 
@@ -195,14 +195,21 @@ expired          インボイスの有効期限                                 
 amount           決済対象金額（送信された金額）                                  int
 currency         決済対象の暗号通貨                                              str
 rate             決済時の換算レート                                              int
-btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                  int
-mona             Monacoinによる請求額（monacoinによる決済時のみ）                int
+btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                  str
+mona             Monacoinによる請求額（monacoinによる決済時のみ）                str
+SKEB             Skebcoinによる請求額。(skebcoinによる決済時のみ)                str
 address          BitcoinまたMonacoinの決済用支払先アドレス                       str
+BIP21            bitcoinまたはmonacoinの支払いURI                                str
+EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが        str
+                 SKEBの場合に返却されます。
 speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
 orderNumber      送信された注文番号（送信された場合のみ）                        str
 referenceNumber  送信されたリファレンス番号（送信された場合のみ）                str
 buyerId          送信された利用者ID（送信された場合のみ）                        str
+webhookUrl       請求書作成時に指定されたwebhook通知先のURL。指定されなかった    str
+                 場合は返却されません。
 ================ =============================================================== =====
+
 ```
 
 ```
@@ -245,21 +252,6 @@ buyerId          送信された利用者ID（送信された場合のみ）    
 	notificationUriを設定した場合、決済完了となったタイミングで決済完了の通知がHTTP(S)で送信されます。
 ```
 
-```eval_rst
-================ =================================================== ====
-キー             詳細                                                型
-================ =================================================== ====
-invoiceId        作成したインボイスを識別するためのID                str
-settled          決済完了日時                                        int
-amount           決済対象金額（送信された金額）                      int
-btc              Bitcoinによる請求額（bitcoinによる決済時のみ）      int
-mona             Monacoinによる請求額（monacoinによる決済時のみ）    int
-orderNumber      送信された注文番号（送信された場合のみ）            str
-referenceNumbe   送信されたリファレンス番号（送信された場合のみ）    str
-buyerId          送信された利用者ID（送信された場合のみ）            str
-================ =================================================== ====
-```
-
 ``` warning::
   notificationMethodにGETを設定した場合は、パラメータは送信されません。 notificationMethodにGETを設定する場合、notificationUriに注文を識別できるような工夫をして設定してください。
 	
@@ -271,14 +263,6 @@ buyerId          送信された利用者ID（送信された場合のみ）    
 	決済完了時のリダイレクト(redirectUri)について
 	
 	顧客がzaif上の決済フォームを表示したまま送金（支払い）したとき、暗号通貨ネットワーク上で着金を確認したタイミングで自動的にリダイレクトされます。 redirectUriを設定してない場合はリダイレクトされず、こちらのフォームが表示されたままになります。その際、入金ステータスは自動的に更新されます。
-```
-
-``` note::
-  Bitcoin建てまたはMonacoin建ての決済
-
-  * 円建てではなく、Bitcoin建てまたはMonacoin建てでの決済を行うことができます。 createInvoiceのbillingCurrencyパラメータ（一覧にはないパラメータです）に"btc"または"mona"を指定して下さい。このときcurrencyパラメータも同じ暗号通貨を指定する必要があります。 
-  * 戻り値からrateは削除されることに注意してください。
-  * BTCまたはMONAがそのまま決済事業者様のアカウントに精算されますので、決済手数料は完全にゼロ％になりますが、円換算を行う際の相場の変動リスクはそのまま決済事業者様が担うことになりますことにご注意ください。
 ```
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -298,24 +282,30 @@ invoiceId    Yes     発行されたinvoiceId str
 
 #### 戻り値
 ```eval_rst
-============ =============================================================== ===
-キー         詳細                                                            型
-============ =============================================================== ===
-invoiceId    作成したインボイスを識別するためのID                            str
-created      インボイス作成日時                                              int
-expired      インボイスの有効期限                                            int
-status       インボイスの状態                                                str
-settled      決済完了日時                                                    int
-amount       決済対象金額（送信された金額）                                  int
-currency     決済対象の暗号通貨                                              str
-rate         決済時の換算レート                                              int
-btc          Bitcoinによる請求額（bitcoinによる決済時のみ）                  int
-mona         Monacoinによる請求額（monacoinによる決済時のみ）                int
-address      BitcoinまたMonacoinの決済用支払先アドレス                       str
-BIP21        bitcoinまたはmonacoinの支払いURI                                str
-speed        決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
-orderNumber  送信された注文番号（送信された場合のみ）                        str
-============ =============================================================== ===
+================ =============================================================== ===
+キー             詳細                                                            型
+================ =============================================================== ===
+invoiceId        作成したインボイスを識別するためのID                            str
+created          インボイス作成日時                                              int
+expired          インボイスの有効期限                                            int
+status           インボイスの状態                                                str
+settled          決済完了日時                                                    int
+amount           決済対象金額（送信された金額）                                  int
+currency         決済対象の暗号通貨                                              str
+rate             決済時の換算レート                                              int
+received         暗号資産の受取金額                                                str
+overpaid         暗号資産の過入金額                                                str
+btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                  str
+mona             Monacoinによる請求額（monacoinによる決済時のみ）                str
+SKEB             Skebcoinによる請求額（Skebcoinによる決済時のみ）                str
+address          BitcoinまたMonacoinの決済用支払先アドレス                       str
+BIP21            bitcoinまたはmonacoinの支払いURI                                str
+EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが        str
+                 SKEBの場合に返却されます。
+speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
+orderNumber      送信された注文番号（送信された場合のみ）                        str
+referenceNumber  送信されたリファレンス番号（送信された場合のみ）                str
+================ =============================================================== ===
 ```
 
 #### インボイスの状態(status)
@@ -375,24 +365,29 @@ invoiceId    Yes     キャンセルしたいinvoiceId   str
 
 #### 戻り値
 ```eval_rst
-============ =============================================================== ====
-キー         詳細                                                            型
-============ =============================================================== ====
-invoiceId    作成したインボイスを識別するためのID                            str
-created      インボイス作成日時                                              int
-expired      インボイスの有効期限                                            int
-status       インボイスの状態                                                str
-settled      決済完了日時                                                    int
-amount       決済対象金額（送信された金額）                                  int
-currency     決済対象の暗号通貨                                              str
-rate         決済時の換算レート                                              int
-btc          Bitcoinによる請求額（bitcoinによる決済時のみ）                  int
-mona         Monacoinによる請求額（monacoinによる決済時のみ）                int
-address      BitcoinまたMonacoinの決済用支払先アドレス                       str
-BIP21        bitcoinまたはmonacoinの支払いURI                                str
-speed        決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
-orderNumber  送信された注文番号（送信された場合のみ）                        str
-============ =============================================================== ====
+================ =============================================================== ====
+キー             詳細                                                            型
+================ =============================================================== ====
+invoiceId        作成したインボイスを識別するためのID                            str
+created          インボイス作成日時                                              int
+expired          インボイスの有効期限                                            int
+status           インボイスの状態                                                str
+settled          決済完了日時                                                    int
+amount           決済対象金額（送信された金額）                                  int
+currency         決済対象の暗号通貨                                              str
+rate             決済時の換算レート                                              int
+overpaid         暗号資産の過入金額                                                str
+btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                  str
+mona             Monacoinによる請求額（monacoinによる決済時のみ）                str
+SKEB             Skebcoinによる請求額（Skebcoinによる決済時のみ）                str
+address          BitcoinまたMonacoinのまたはSkebcoin決済用支払先アドレス                       str
+BIP21            bitcoinまたはmonacoinの支払いURI                                str
+EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが        str
+                 SKEBの場合に返却されます。
+speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
+orderNumber      送信された注文番号（送信された場合のみ）                        str
+referenceNumber  送信されたリファレンス番号（送信された場合のみ）                str
+================ =============================================================== ====
 ```
 
 ``` Note::
