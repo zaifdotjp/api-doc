@@ -769,86 +769,91 @@ funds 残高                           dict
 
 #### エラーメッセージ
 ```eval_rst
-============================================================================= ===================================================================
-メッセージ                                                                     詳細
-============================================================================= ===================================================================
-kyc is not finished                                                           郵送による本人確認が完了していません。
-insufficient funds                                                            取引に必要な残高が存在しません。
-please specify kind                                                           宛先を設定してください
-invalid kind                                                                  宛先の形式が正しくありません
-please specify beneficiary_corp_flg                                           送金先の種別を指定してください
-invalid beneficiary_corp_flg                                                  送金先の種別の形式が正しくありません
-please specify vasp_name                                                      送金先「その他」を具体的に入力してください
-invalid vasp_name length                                                      送金先「その他」の長さが正しくありません
-invalid vasp_name format                                                      送金先「その他」の形式が正しくありません
-please specify beneficiary_name_last_name_kana                                送金先氏名（カナ）（姓）を指定してください
-invalid beneficiary_name_last_name_kana length                                送金先氏名（カナ）（姓）の長さが正しくありません
-invalid beneficiary_name_last_name_kana format                                送金先氏名（カナ）（姓）の形式が正しくありません
-please set beneficiary_name_last_name_kana in the withdrawal address setting  送金先氏名（カナ）（姓）を出金先アドレス管理で設定してください
-please specify beneficiary_name_first_name_kana                               送金先氏名（カナ）（名）を指定してください
-invalid beneficiary_name_first_name_kana length                               送金先氏名（カナ）（名）の長さが正しくありません
-invalid beneficiary_name_first_name_kana format                               送金先氏名（カナ）（名）の形式が正しくありません
-please set beneficiary_name_first_name_kana in the withdrawal address setting 送金先氏名（カナ）（名）を出金先アドレス管理で設定してください
-please specify beneficiary_name_last_name_en                                  送金先氏名（アルファベット）（姓）を指定してください
-invalid beneficiary_name_last_name_en length                                  送金先氏名（アルファベット）（姓）の長さが正しくありません
-invalid beneficiary_name_last_name_en format                                  送金先氏名（アルファベット）（姓）の形式が正しくありません
-please set beneficiary_name_last_name_en in the withdrawal address setting    送金先氏名（アルファベット）（姓）を出金先アドレス管理で設定してください
-please specify beneficiary_name_first_name_en                                 送金先氏名（アルファベット）（名）を指定してください
-invalid beneficiary_name_first_name_en length                                 送金先氏名（アルファベット）（名）の長さが正しくありません
-invalid beneficiary_name_first_name_en format                                 送金先氏名（アルファベット）（名）の形式が正しくありません
-please set beneficiary_name_first_name_en in the withdrawal address setting   送金先氏名（アルファベット）（名）を出金先アドレス管理で設定してください
-please specify corp_type_id                                                   法人種別を指定してください
-invalid corp_type_id format                                                   法人種別の形式が正しくありません
-please set corp_type_id in the withdrawal address setting                     法人種別を出金先アドレス管理で設定してください
-please specify corp_type_other_text                                           法人種別の具体的な名称を指定してください
-invalid corp_type_other_text length                                           法人種別の具体的な名称の長さが正しくありません
-invalid corp_type_other_text format                                           法人種別の具体的な名称の形式が正しくありません
-please set corp_type_other_text in the withdrawal address setting             法人種別の具体的な名称を出金先アドレス管理で設定してください
-please specify corp_identifier_type_position                                  法人格（位置）を指定してください
-invalid corp_identifier_type_position format                                  法人格（位置）の形式が正しくありません
-please set corp_identifier_type_position in the withdrawal address setting    法人格（位置）を出金先アドレス管理で設定してください
-please specify corp_name_kana                                                 送金先名称（カナ）を指定してください
-invalid corp_name_kana length                                                 送金先名称（カナ）の長さが正しくありません
-invalid corp_name_kana format                                                 送金先名称（カナ）の形式が正しくありません
-please set corp_name_kana in the withdrawal address setting                   送金先名称（カナ）を出金先アドレス管理で設定してください
-please specify corp_name_en                                                   送金先名称（アルファベット）を指定してください
-invalid corp_name_en length                                                   送金先名称（アルファベット）の長さが正しくありません
-invalid corp_name_en format                                                   送金先名称（アルファベット）の形式が正しくありません
-please set corp_name_en in the withdrawal address setting                     送金先名称（アルファベット）を出金先アドレス管理で設定してください
-please specify beneficiary_zip_code                                           送金先の郵便番号を指定してください
-invalid beneficiary_zip_code length                                           送金先の郵便番号の長さが正しくありません
-invalid beneficiary_zip_code format                                           送金先の郵便番号の形式が正しくありません
-please set beneficiary_zip_code in the withdrawal address setting             送金先の郵便番号を出金先アドレス管理で設定してください
-please specify beneficiary_country_id                                         送金先（相手国）を指定してください
-invalid beneficiary_country_id format                                         送金先（相手国）の形式が正しくありません
-please set beneficiary_country_id in the withdrawal address setting           送金先（相手国）を出金先アドレス管理で設定してください
-please specify beneficiary_area_jp                                            送金先の地域（日本）を指定してください
-invalid beneficiary_area_jp length                                            送金先の地域（日本）の長さが正しくありません
-please set beneficiary_area_jp in the withdrawal address setting              送金先の地域（日本）を出金先アドレス管理で設定してください
-please specify beneficiary_area_other                                         送金先の地域（日本以外）を指定してください
-invalid beneficiary_area_other length                                         送金先の地域（日本以外）の長さが正しくありません
-please set beneficiary_area_other in the withdrawal address setting           送金先の地域（日本以外）を出金先アドレス管理で設定してください
-please specify transfer_tx_purpose_id                                         移転取引の目的を指定してください
-invalid transfer_tx_purpose_id format                                         移転取引の目的の形式が正しくありません
-please specify transfer_tx_purpose_other_text                                 移転取引の目的について具体的な内容を指定してください
-invalid transfer_tx_purpose_other_text length                                 移転取引の目的の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_item_text                                  移転取引の目的（商品の具体的な品目）について具体的な内容を指定してください
-invalid transfer_tx_purpose_item_text length                                  移転取引の目的（商品の具体的な品目）の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_origin_text                                移転取引の目的（原産地）について具体的な内容を指定してください
-invalid transfer_tx_purpose_origin_text length                                移転取引の目的（原産地）の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_port_text                                  移転取引の目的（船積地）について具体的な内容を指定してください
-invalid transfer_tx_purpose_port_text length                                  移転取引の目的（船積地）の具体的な内容の長さが正しくありません
-please specify transfer_tx_purpose_destination_text                           移転取引の目的（仕向地）について具体的な内容を指定してください
-invalid transfer_tx_purpose_destination_text length                           移転取引の目的（仕向地）の具体的な内容の長さが正しくありません
-please specify vasp_master_id                                                 VASP情報IDを設定してください
-invalid vasp_master_id                                                        VASP情報IDが正しくありません
-please specify vasp_name                                                      送金先を設定してください
-invalid vasp_name length                                                      送金先の長さが正しくありません
-invalid vasp_name format                                                      送金先の形式が正しくありません
-invalid agreed parameter                                                      同意状態の形式が正しくありません
-invalid agreement state                                                       同意状態を同意（True）で設定してください
-Account opening information is incomplete                                     基本情報の必須項目が登録されていません
-============================================================================= ===================================================================
+================================================================================== ===================================================================
+メッセージ                                                                          詳細
+================================================================================== ===================================================================
+kyc is not finished                                                                郵送による本人確認が完了していません。
+insufficient funds                                                                 取引に必要な残高が存在しません。
+please specify kind                                                                宛先を設定してください
+invalid kind                                                                       宛先の形式が正しくありません
+please specify beneficiary_corp_flg                                                送金先の種別を指定してください
+invalid beneficiary_corp_flg                                                       送金先の種別の形式が正しくありません
+please specify vasp_name                                                           送金先「その他」を具体的に入力してください
+invalid vasp_name length                                                           送金先「その他」の長さが正しくありません
+invalid vasp_name format                                                           送金先「その他」の形式が正しくありません
+please specify beneficiary_name_last_name_kana                                     送金先氏名（カナ）（姓）を指定してください
+invalid beneficiary_name_last_name_kana length                                     送金先氏名（カナ）（姓）の長さが正しくありません
+invalid beneficiary_name_last_name_kana format                                     送金先氏名（カナ）（姓）の形式が正しくありません
+please set beneficiary_name_last_name_kana in the withdrawal address setting       送金先氏名（カナ）（姓）を出金先アドレス管理で設定してください
+please specify beneficiary_name_first_name_kana                                    送金先氏名（カナ）（名）を指定してください
+invalid beneficiary_name_first_name_kana length                                    送金先氏名（カナ）（名）の長さが正しくありません
+invalid beneficiary_name_first_name_kana format                                    送金先氏名（カナ）（名）の形式が正しくありません
+please set beneficiary_name_first_name_kana in the withdrawal address setting      送金先氏名（カナ）（名）を出金先アドレス管理で設定してください
+please specify beneficiary_name_last_name_en                                       送金先氏名（アルファベット）（姓）を指定してください
+invalid beneficiary_name_last_name_en length                                       送金先氏名（アルファベット）（姓）の長さが正しくありません
+invalid beneficiary_name_last_name_en format                                       送金先氏名（アルファベット）（姓）の形式が正しくありません
+please set beneficiary_name_last_name_en in the withdrawal address setting         送金先氏名（アルファベット）（姓）を出金先アドレス管理で設定してください
+please specify beneficiary_name_first_name_en                                      送金先氏名（アルファベット）（名）を指定してください
+invalid beneficiary_name_first_name_en length                                      送金先氏名（アルファベット）（名）の長さが正しくありません
+invalid beneficiary_name_first_name_en format                                      送金先氏名（アルファベット）（名）の形式が正しくありません
+please set beneficiary_name_first_name_en in the withdrawal address setting        送金先氏名（アルファベット）（名）を出金先アドレス管理で設定してください
+please specify corp_type_id                                                        法人種別を指定してください
+invalid corp_type_id format                                                        法人種別の形式が正しくありません
+please set corp_type_id in the withdrawal address setting                          法人種別を出金先アドレス管理で設定してください
+please specify corp_type_other_text                                                法人種別の具体的な名称を指定してください
+invalid corp_type_other_text length                                                法人種別の具体的な名称の長さが正しくありません
+invalid corp_type_other_text format                                                法人種別の具体的な名称の形式が正しくありません
+please set corp_type_other_text in the withdrawal address setting                  法人種別の具体的な名称を出金先アドレス管理で設定してください
+please specify corp_identifier_type_position                                       法人格（位置）を指定してください
+invalid corp_identifier_type_position format                                       法人格（位置）の形式が正しくありません
+please set corp_identifier_type_position in the withdrawal address setting         法人格（位置）を出金先アドレス管理で設定してください
+please specify corp_name_kana                                                      送金先名称（カナ）を指定してください
+invalid corp_name_kana length                                                      送金先名称（カナ）の長さが正しくありません
+invalid corp_name_kana format                                                      送金先名称（カナ）の形式が正しくありません
+please set corp_name_kana in the withdrawal address setting                        送金先名称（カナ）を出金先アドレス管理で設定してください
+please specify corp_name_en                                                        送金先名称（アルファベット）を指定してください
+invalid corp_name_en length                                                        送金先名称（アルファベット）の長さが正しくありません
+invalid corp_name_en format                                                        送金先名称（アルファベット）の形式が正しくありません
+please set corp_name_en in the withdrawal address setting                          送金先名称（アルファベット）を出金先アドレス管理で設定してください
+please specify beneficiary_zip_code                                                送金先の郵便番号を指定してください
+invalid beneficiary_zip_code length                                                送金先の郵便番号の長さが正しくありません
+invalid beneficiary_zip_code format                                                送金先の郵便番号の形式が正しくありません
+please set beneficiary_zip_code in the withdrawal address setting                  送金先の郵便番号を出金先アドレス管理で設定してください
+please specify beneficiary_country_id                                              送金先（相手国）を指定してください
+invalid beneficiary_country_id format                                              送金先（相手国）の形式が正しくありません
+please set beneficiary_country_id in the withdrawal address setting                送金先（相手国）を出金先アドレス管理で設定してください
+please specify beneficiary_area_jp                                                 送金先の地域（日本）を指定してください
+invalid beneficiary_area_jp length                                                 送金先の地域（日本）の長さが正しくありません
+please set beneficiary_area_jp in the withdrawal address setting                   送金先の地域（日本）を出金先アドレス管理で設定してください
+please specify beneficiary_area_other                                              送金先の地域（日本以外）を指定してください
+invalid beneficiary_area_other length                                              送金先の地域（日本以外）の長さが正しくありません
+please set beneficiary_area_other in the withdrawal address setting                送金先の地域（日本以外）を出金先アドレス管理で設定してください
+please specify transfer_tx_purpose_id                                              移転取引の目的を指定してください
+invalid transfer_tx_purpose_id format                                              移転取引の目的の形式が正しくありません
+please specify transfer_tx_purpose_other_text                                      移転取引の目的について具体的な内容を指定してください
+invalid transfer_tx_purpose_other_text length                                      移転取引の目的の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_item_text                                       移転取引の目的（商品の具体的な品目）について具体的な内容を指定してください
+invalid transfer_tx_purpose_item_text length                                       移転取引の目的（商品の具体的な品目）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_origin_text                                     移転取引の目的（原産地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_origin_text length                                     移転取引の目的（原産地）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_port_text                                       移転取引の目的（船積地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_port_text length                                       移転取引の目的（船積地）の具体的な内容の長さが正しくありません
+please specify transfer_tx_purpose_destination_text                                移転取引の目的（仕向地）について具体的な内容を指定してください
+invalid transfer_tx_purpose_destination_text length                                移転取引の目的（仕向地）の具体的な内容の長さが正しくありません
+please specify vasp_master_id                                                      VASP情報IDを設定してください
+invalid vasp_master_id                                                             VASP情報IDが正しくありません
+please specify vasp_name                                                           送金先を設定してください
+invalid vasp_name length                                                           送金先の長さが正しくありません
+invalid vasp_name format                                                           送金先の形式が正しくありません
+invalid agreed parameter                                                           同意状態の形式が正しくありません
+invalid agreement state                                                            同意状態を同意（True）で設定してください
+Account opening information is incomplete                                          基本情報の必須項目が登録されていません
+zaif payment address expired                                                       決済の有効期限が切れています。
+zaif payment address inactive                                                      この決済アドレスはもう支払いを受け付けていません。
+zaif payment currency mismatch                                                     請求通貨と支払い通貨が一致していません。正しい通貨でお支払いください。
+zaif payment amount mismatch                                                       請求金額と支払い金額が一致していません。正確な金額をお支払いください。
+zaif payment address has partial deposits and cannot accept additional withdrawals 部分入金されている決済アドレスです
+================================================================================== ===================================================================
 ```
 
 
