@@ -250,12 +250,15 @@ buyerId          送信された利用者ID（送信された場合のみ）    
 キー             詳細                                                型
 ================ =================================================== ====
 invoiceId        作成したインボイスを識別するためのID                str
-settled          決済完了日時                                        int
+settled          決済完了日時                                        UNIX_TIMESTAMP
+settledFormat    決済完了日時                                        TIMESTAMP
 amount           決済対象金額（送信された金額）                      int
 btc              Bitcoinによる請求額（bitcoinによる決済時のみ）      int
 mona             Monacoinによる請求額（monacoinによる決済時のみ）    int
+例）SKEB          請求額                                              str
+crypto_amount    請求額                                              str
 orderNumber      送信された注文番号（送信された場合のみ）            str
-referenceNumbe   送信されたリファレンス番号（送信された場合のみ）    str
+referenceNumber  送信されたリファレンス番号（送信された場合のみ）     str
 buyerId          送信された利用者ID（送信された場合のみ）            str
 ================ =================================================== ====
 ```
