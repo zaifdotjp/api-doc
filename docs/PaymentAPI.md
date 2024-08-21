@@ -252,6 +252,24 @@ webhookUrl       請求書作成時に指定されたwebhook通知先のURL。�
 	notificationUriを設定した場合、決済完了となったタイミングで決済完了の通知がHTTP(S)で送信されます。
 ```
 
+```eval_rst
+================ =================================================== ====
+キー             詳細                                                型
+================ =================================================== ====
+invoiceId        作成したインボイスを識別するためのID                str
+settled          決済完了日時                                        UNIX_TIMESTAMP
+settledFormat    決済完了日時                                        TIMESTAMP
+amount           決済対象金額（送信された金額）                      int
+btc              Bitcoinによる請求額（bitcoinによる決済時のみ）      int
+mona             Monacoinによる請求額（monacoinによる決済時のみ）    int
+例）SKEB          請求額                                              str
+crypto_amount    請求額                                              str
+orderNumber      送信された注文番号（送信された場合のみ）            str
+referenceNumber  送信されたリファレンス番号（送信された場合のみ）     str
+buyerId          送信された利用者ID（送信された場合のみ）            str
+================ =================================================== ====
+```
+
 ``` warning::
   notificationMethodにGETを設定した場合は、パラメータは送信されません。 notificationMethodにGETを設定する場合、notificationUriに注文を識別できるような工夫をして設定してください。
 	
