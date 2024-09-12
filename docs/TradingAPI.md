@@ -712,7 +712,7 @@ amount                                    Yes   出金額                       
 opt_fee                                   No    採掘者への手数料。ただしcurrencyがbtc、mona以外の時に指定するとエラーとなります。                                                                                                   numerical
 kind                                      No    (self：本人宛、other：それ以外)　左記文字列のみ使用可能                                                                                                                             str
 beneficiary_corp_flg                      No   送金先の種別　(1：個人、2：法人)　左記のみ使用可能 kindでselfを指定した場合は不要、otherを指定した場合は必須                                                                         str
-other_vasp_name                           No   送金先の名称　vasp_master_id　でvasp情報IDに「1：その他」指定した場合は必須 max：100文字まで                                                                                         str
+other_vasp_name                           No   送金先の名称　vasp_master_id　でvasp情報IDに「1：その他」もしくは「47：対象法域外の海外取引所」を指定した場合は必須 max：100文字まで                                                 str
 beneficiary_name_last_name_kana           No   送金先氏名（カナ）姓　個人の場合必須　max：100文字まで                                                                                                                               str
 beneficiary_name_first_name_kana          No   送金先氏名（カナ）名　個人の場合必須　max：100文字まで                                                                                                                               str
 beneficiary_name_last_name_en             No   送金先氏名（英字）姓　個人の場合必須　半角英字（大文字）のみ使用可能 max：100文字まで                                                                                                str
@@ -733,7 +733,7 @@ corp_identifier_type_position             No   法人格の位置   （1： 前�
 corp_name_kana                            No   送金先名称（カナ）法人の場合必須　max：100文字まで 全角カナと全角スペースのみ使用可能                                                                                                str
 corp_name_en                              No   送金先名称（アルファベット）法人の場合必須　max：100文字まで 半角の英字、.(ピリオド)、,(カンマ)、『 』(スペース)のみ使用可能                                                         str
 vasp_master_id                            No   現物公開API vasp_info で取得したvasp_master_id　を指定する。左記以外は不可                                                                                                           str
-vasp_name                                 No   vasp_master_id　が 1(その他）の場合のみ指定必須。max：100文字まで                                                                                                                    str
+vasp_name                                 No   vasp_master_id　でvasp情報IDに「1：その他」もしくは「47：対象法域外の海外取引所」を指定した場合は必須 max：100文字まで                                                               str
 agreed                                    Yes  同意状態（True：同意、False：非同意）同意していただく内容については下記をご参照ください                                                                                              bool
 ========================================= ==== ==================================================================================================================================================================================== ============== ===========
 ```
