@@ -43,7 +43,7 @@ sha1secret Secret Keyをsha1ハッシュ化した文字列
 ```
 
 ``` note::
-	"md5secret"と"Secret Key"はどちらかをセット
+	"md5secret"と"sha1secret"はどちらかをセット
 ```
 
 ### パラメータ
