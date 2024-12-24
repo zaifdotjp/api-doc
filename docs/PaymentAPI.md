@@ -136,10 +136,10 @@ style='width:500px; overflow: hidden; padding:10px;'></iframe>
 パラメータ         必須 詳細                                                                                                                                    型  例
 ================== ==== ======================================================================================================================================= === ================
 method             Yes  createInvoice                                                                                                                           str 
-speed              No   （廃止済み）決済完了とみなすスピード。                                                                                                              str high medium low
+speed              No   （廃止済み）決済完了とみなすスピード。                                                                                                  str     high medium low
 notificationUri    No   決済完了したタイミングでの通知先URI 事業者様のECサイトシステムに通知を行うためのものになります。                                        str 
 notificationMethod No   決済完了したタイミングでの通知先URIへ通知する際に使用されるHTTPメソッド。デフォルトはPOSTになります。                                   str GET または POST
-webhookUrl         No   決済の状態が変化したタイミングでwebhook通知を送信する先のURL。事業者様のECサイトシステムに通知を行うためのものになります。                                        str 
+webhookUrl         No   決済の状態が変化したタイミングでwebhook通知を送信する先のURL。事業者様のECサイトシステムに通知を行うためのものになります。              str 
 redirectUri        No   決済フォームで着金後、ECサイトへ戻るためのリダイレクト先のURI。設定されなかった場合はリダイレクトせず着金後のステータスが表示されます。 str 
 currency           Yes  決済に使用する暗号通貨                                                                                                                  str btc または SKEB
 amount             Yes  決済金額（日本円）。実際の請求対象金額。1円単位、カンマ無し。                                                                           int 
@@ -187,25 +187,25 @@ buyerEmail         No   利用者メールアドレス                          
 ================ =============================================================== =====
 キー             詳細                                                            型
 ================ =============================================================== =====
-invoiceId        作成したインボイスを識別するためのID                            str
-invoiceUri       作成したインボイスに対する支払フォームのURI                     str
-invoiceIframeUri 作成したインボイスに対するiframe版支払フォームのURI             str
-created          インボイス作成日時                                              int
-expired          インボイスの有効期限                                            int
-amount           決済対象金額（送信された金額）                                  int
-currency         決済対象の暗号通貨                                              str
-rate             決済時の換算レート                                              int
-btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                  str
-SKEB             Skebcoinによる請求額。(skebcoinによる決済時のみ)                str
-address          Bitcoinの決済用支払先アドレス                       str
-BIP21            bitcoinの支払いURI                                str
-EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが        str
+invoiceId        作成したインボイスを識別するためのID                               str
+invoiceUri       作成したインボイスに対する支払フォームのURI                         str
+invoiceIframeUri 作成したインボイスに対するiframe版支払フォームのURI                 str
+created          インボイス作成日時                                                int
+expired          インボイスの有効期限                                              int
+amount           決済対象金額（送信された金額）                                     int
+currency         決済対象の暗号通貨                                                str
+rate             決済時の換算レート                                                int
+btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                     str
+SKEB             Skebcoinによる請求額。(skebcoinによる決済時のみ)                   str
+address          Bitcoinの決済用支払先アドレス                                     str
+BIP21            bitcoinの支払いURI                                               str
+EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが          str
                  SKEBの場合に返却されます。
-speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
-orderNumber      送信された注文番号（送信された場合のみ）                        str
-referenceNumber  送信されたリファレンス番号（送信された場合のみ）                str
-buyerId          送信された利用者ID（送信された場合のみ）                        str
-webhookUrl       請求書作成時に指定されたwebhook通知先のURL。指定されなかった    str
+speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)        str
+orderNumber      送信された注文番号（送信された場合のみ）                           str
+referenceNumber  送信されたリファレンス番号（送信された場合のみ）                    str
+buyerId          送信された利用者ID（送信された場合のみ）                           str
+webhookUrl       請求書作成時に指定されたwebhook通知先のURL。指定されなかった        str
                  場合は返却されません。
 ================ =============================================================== =====
 
@@ -384,24 +384,24 @@ invoiceId    Yes     キャンセルしたいinvoiceId   str
 ================ =============================================================== ====
 キー             詳細                                                            型
 ================ =============================================================== ====
-invoiceId        作成したインボイスを識別するためのID                            str
-created          インボイス作成日時                                              int
-expired          インボイスの有効期限                                            int
-status           インボイスの状態                                                str
-settled          決済完了日時                                                    int
-amount           決済対象金額（送信された金額）                                  int
-currency         決済対象の暗号通貨                                              str
-rate             決済時の換算レート                                              int
+invoiceId        作成したインボイスを識別するためのID                               str
+created          インボイス作成日時                                                int
+expired          インボイスの有効期限                                              int
+status           インボイスの状態                                                  str
+settled          決済完了日時                                                      int
+amount           決済対象金額（送信された金額）                                     int
+currency         決済対象の暗号通貨                                                str
+rate             決済時の換算レート                                                int
 overpaid         暗号資産の過入金額                                                str
-btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                  str
-SKEB             Skebcoinによる請求額（Skebcoinによる決済時のみ）                str
-address          BitcoinまたはSkebcoin決済用支払先アドレス                       str
-BIP21            bitcoinの支払いURI                                str
-EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが        str
+btc              Bitcoinによる請求額（bitcoinによる決済時のみ）                     str
+SKEB             Skebcoinによる請求額（Skebcoinによる決済時のみ）                   str
+address          BitcoinまたはSkebcoin決済用支払先アドレス                          str
+BIP21            bitcoinの支払いURI                                               str
+EIP681           SKEBでの支払いに利用可能なEIP681形式のURIです。currencyが           str
                  SKEBの場合に返却されます。
-speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)   str
-orderNumber      送信された注文番号（送信された場合のみ）                        str
-referenceNumber  送信されたリファレンス番号（送信された場合のみ）                str
+speed            決済スピード（送信されたものまたはデフォルトで適用されたもの)         str
+orderNumber      送信された注文番号（送信された場合のみ）                            str
+referenceNumber  送信されたリファレンス番号（送信された場合のみ）                     str
 ================ =============================================================== ====
 ```
 
