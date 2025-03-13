@@ -163,15 +163,13 @@ server_time UNIX時間で換算された日本時間 int
             "jpy":15320,
             "btc":1.389,
             "xem":100.2,
-            "mona":2600,
-            "pepecash":0.1
+            "mona":2600
         },
         "deposit":{
             "jpy":20440,
             "btc":1.479,
             "xem":100.2,
-            "mona":3200,
-            "pepecash":0.1
+            "mona":3200
         },
         "rights":{
             "info":1,
@@ -238,15 +236,13 @@ server_time UNIX時間で換算された日本時間 int
             "jpy": 15320,
             "btc": 1.389,
             "xem": 100.2,
-            "mona": 2600,
-            "pepecash": 0.1
+            "mona": 2600
         },
         "deposit": {
             "jpy": 20440,
             "btc": 1.479,
             "xem": 100.2,
-            "mona": 3200,
-            "pepecash": 0.1
+            "mona": 3200
         },
         "rights": {
             "info": 1,
